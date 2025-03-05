@@ -47,8 +47,8 @@
                05 DET-BMI          PIC 999.99.
                05 FILLER           PIC X VALUE '%'.
          
-       PROCEDURE DIVISION. 
-
+       PROCEDURE DIVISION.
+       
        0050-OPEN-FILE.
            OPEN INPUT BMI-FILE.
            OPEN OUTPUT PRINT-FILE.
