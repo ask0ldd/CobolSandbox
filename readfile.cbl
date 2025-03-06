@@ -26,38 +26,50 @@
            05 REC-COUNTER PIC 9(3) VALUE 0.
        
        PROCEDURE DIVISION.
-
+       
+       PERFORM 000-MAIN.
+       
+       000-MAIN.
            PERFORM 100-INITIALIZE.
            PERFORM 200-PROCESS-RECORDS UNTIL EOF-SWITCH = "Y".
-           PERFORM 300-TERMINATE.
+           PERFORM 400-TERMINATE.
 
        100-INITIALIZE.
 
            OPEN INPUT IN-FILE.
 
+       200-PROCESS-RECORDS.
+
            READ IN-FILE
                AT END
                    MOVE "Y" TO EOF-SWITCH
                NOT AT END
                    COMPUTE REC-COUNTER = REC-COUNTER + 1
+                   PERFORM 300-DISPLAY-RECORD
            END-READ.
 
-       200-PROCESS-RECORDS.
+      *     IF EOF-SWITCH = "N"
+      *            DISPLAY "NEW RECORD"
+      *            DISPLAY "ID >>>>> " ID-GAME
+      *            DISPLAY "TITLE >>>>> " TITLE-GAME
+      *            DISPLAY "RELEASE DATE >>>>> " DATE-GAME
+      *            DISPLAY "NOTE >>>>> " NOTE-GAME
+      *            DISPLAY "   "
+      *     END-IF.
 
+       300-DISPLAY-RECORD.
+           DISPLAY "NEW RECORD".
            DISPLAY "ID >>>>> " ID-GAME.
            DISPLAY "TITLE >>>>> " TITLE-GAME.
            DISPLAY "RELEASE DATE >>>>> " DATE-GAME.
            DISPLAY "NOTE >>>>> " NOTE-GAME.
+           DISPLAY "   ".
 
-           READ IN-FILE
-               AT END
-                   MOVE "Y" TO EOF-SWITCH
-               NOT AT END
-                   COMPUTE REC-COUNTER = REC-COUNTER + 1
-           END-READ.
-
-       300-TERMINATE.
-
+       400-TERMINATE.
+           DISPLAY "   ".
+           DISPLAY "END".
            DISPLAY "N RECORDS >>>>> " REC-COUNTER.
            CLOSE IN-FILE.
 
+       STOP RUN.
+       END PROGRAM READ-FILE.
