@@ -1,3 +1,4 @@
 sandbox.md
 *.exe
 *.txt
+!GAMES.TXT
