@@ -12,10 +12,10 @@
        FD IN-FILE.
        01 IN-RECORD.
            05 ID-GAME          PIC 99.
-           05 SPCS1            PIC X(2).
+           05 FILLER           PIC X(2).
            05 TITLE-GAME       PIC X(40).
            05 DATE-GAME        PIC X(10).
-           05 SPCS2            PIC X(2).
+           05 FILLER           PIC X(2).
            05 NOTE-GAME        PIC 99.
 
        WORKING-STORAGE SECTION.
@@ -28,6 +28,7 @@
        PROCEDURE DIVISION.
        
        PERFORM 000-MAIN.
+       STOP RUN.
        
        000-MAIN.
            PERFORM 100-INITIALIZE.
@@ -59,11 +60,12 @@
 
        300-DISPLAY-RECORD.
            DISPLAY "NEW RECORD".
-           DISPLAY "ID >>>>> " ID-GAME.
-           DISPLAY "TITLE >>>>> " TITLE-GAME.
-           DISPLAY "RELEASE DATE >>>>> " DATE-GAME.
-           DISPLAY "NOTE >>>>> " NOTE-GAME.
+           DISPLAY "ID       >>>>> " ID-GAME.
+           DISPLAY "TITLE    >>>>> " TITLE-GAME.
+           DISPLAY "RELEASED >>>>> " DATE-GAME.
+           DISPLAY "NOTE     >>>>> " NOTE-GAME "%".
            DISPLAY "   ".
+      *    DATE FORMAT
 
        400-TERMINATE.
            DISPLAY "   ".
@@ -71,5 +73,4 @@
            DISPLAY "N RECORDS >>>>> " REC-COUNTER.
            CLOSE IN-FILE.
 
-       STOP RUN.
        END PROGRAM READ-FILE.
